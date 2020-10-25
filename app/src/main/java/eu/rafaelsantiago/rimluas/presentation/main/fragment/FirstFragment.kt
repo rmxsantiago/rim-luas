@@ -2,6 +2,7 @@ package eu.rafaelsantiago.rimluas.presentation.main.fragment
 
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,7 +36,7 @@ class FirstFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupTramsRecyclerView(view)
-        setupViewModel()
+        setupViewModel(view)
     }
 
     private fun setupTramsRecyclerView(view: View) {
@@ -49,12 +50,15 @@ class FirstFragment : Fragment() {
         }!!
     }
 
-    private fun setupViewModel() {
+    private fun setupViewModel(parentView: View) {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         viewModel.getStopForecast()
-        viewModel.forecastData.observe(requireActivity(), Observer { forecast ->
+        viewModel.forecastData.observe(requireActivity(), { forecast ->
             activity?.title = forecast.stopName
+
+            parentView.findViewById<TextView>(R.id.txtViewMessage).text = forecast.message
+
             val tramDirection = viewModel.getTramDirection(forecast)
             luasRecyclerViewAdapter.updateData(tramDirection.trams)
         })
