@@ -52,10 +52,11 @@ class FirstFragment : Fragment() {
     private fun setupViewModel() {
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        viewModel.getStopForecast(LuasStopEnum.STILLORGAN)
+        viewModel.getStopForecast()
         viewModel.forecastData.observe(requireActivity(), Observer { forecast ->
             activity?.title = forecast.stopName
-            luasRecyclerViewAdapter.updateData(forecast.lines[0].trams)
+            val tramDirection = viewModel.getTramDirection(forecast)
+            luasRecyclerViewAdapter.updateData(tramDirection.trams)
         })
     }
 
@@ -68,10 +69,9 @@ class FirstFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_refresh -> {
-                Snackbar.make(activity?.window?.decorView?.findViewById(android.R.id.content)!!, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show()
+                Snackbar.make(activity?.window?.decorView?.findViewById(android.R.id.content)!!, "Refreshing Luas forecast...", Snackbar.LENGTH_LONG).show()
 
-                viewModel.getStopForecast(LuasStopEnum.STILLORGAN)
+                viewModel.getStopForecast()
                 true
             }
             else -> super.onOptionsItemSelected(item)
