@@ -1,11 +1,9 @@
-package eu.rafaelsantiago.rimluas.presentation.activity
+package eu.rafaelsantiago.rimluas.presentation.main.activity
 
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.MenuItem
 import eu.rafaelsantiago.rimluas.R
 
 class MainActivity : AppCompatActivity() {
