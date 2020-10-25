@@ -1,15 +1,13 @@
 package eu.rafaelsantiago.rimluas.presentation.main.fragment
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import eu.rafaelsantiago.rimluas.R
 import eu.rafaelsantiago.rimluas.domain.enum.LuasStopEnum
 import eu.rafaelsantiago.rimluas.presentation.main.adapter.LuasRecyclerViewAdapter
@@ -29,6 +27,7 @@ class FirstFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_first, container, false)
     }
 
@@ -58,5 +57,24 @@ class FirstFragment : Fragment() {
             activity?.title = forecast.stopName
             luasRecyclerViewAdapter.updateData(forecast.lines[0].trams)
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_refresh -> {
+                Snackbar.make(activity?.window?.decorView?.findViewById(android.R.id.content)!!, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
+
+                viewModel.getStopForecast(LuasStopEnum.STILLORGAN)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
