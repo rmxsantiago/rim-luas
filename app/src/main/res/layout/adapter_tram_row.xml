@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp">
+    android:layout_marginTop="@dimen/card_margin_vertical"
+    android:layout_marginBottom="@dimen/card_margin_vertical"
+    android:layout_marginStart="@dimen/card_margin_horizontal"
+    android:layout_marginEnd="@dimen/card_margin_horizontal">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="16dp"
-        android:paddingBottom="16dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:paddingTop="@dimen/margin_vertical"
+        android:paddingBottom="@dimen/margin_vertical"
+        android:paddingStart="@dimen/margin_horizontal"
+        android:paddingEnd="@dimen/margin_horizontal">
 
         <TextView
             android:id="@+id/txtDestination"
@@ -28,7 +28,7 @@
 
         <TextView
             android:id="@+id/txtDueMinutes"
-            android:layout_width="32dp"
+            android:layout_width="@dimen/minutes_width"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             app:layout_constraintEnd_toEndOf="parent"
